@@ -51,6 +51,6 @@ dependencies {
   implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.23'
 
   // API contract from api-marketplace-onboarding
-  implementation 'uk.gov.hmcts.cp:api-marketplace-onboarding:0.0.1'
+  implementation 'uk.gov.hmcts.cp:api-marketplace-onboarding:0.0.2'
   implementation 'io.swagger.core.v3:swagger-annotations:2.2.48'
 }
