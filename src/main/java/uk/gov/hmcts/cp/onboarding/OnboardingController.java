@@ -21,7 +21,7 @@ public class OnboardingController implements OnboardingApi {
     private final List<OnboardingRequest> store = new CopyOnWriteArrayList<>();
 
     @Override
-    public ResponseEntity<OnboardingRequestResponse> createOnboardingRequest(OnboardingRequest request) {
+    public ResponseEntity<OnboardingRequestResponse> createOnboardingRequest(final OnboardingRequest request) {
         log.info("Onboarding request received: name={}, organisation={}, email={}, apiRequested={}, environment={}, useCase={}",
             request.getName(),
             request.getOrganisation(),
@@ -32,7 +32,7 @@ public class OnboardingController implements OnboardingApi {
 
         store.add(request);
 
-        OnboardingRequestResponse response = OnboardingRequestResponse.builder()
+        final OnboardingRequestResponse response = OnboardingRequestResponse.builder()
             .requestId("onb-" + UUID.randomUUID())
             .status("pending")
             .submittedAt(Instant.now())
