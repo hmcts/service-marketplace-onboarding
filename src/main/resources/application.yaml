@@ -1,6 +1,6 @@
 spring:
   application:
-    name: service-UPDATE-TO-BE-NAME-OF-SERVICE
+    name: service-marketplace-onboarding
 
 server:
   port: ${SERVER_PORT:8082}
@@ -18,7 +18,14 @@ management:
   endpoint:
     health:
       probes:
-        enabled: true   # enables liveness / readiness groups
+        enabled: true
+  otlp:
+    metrics:
+      export:
+        enabled: false
+    tracing:
+      export:
+        enabled: false
 
 logging:
   level:
