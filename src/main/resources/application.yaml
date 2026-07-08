@@ -1,9 +1,18 @@
 spring:
   application:
     name: service-marketplace-onboarding
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/appdb}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
 
 server:
-  port: ${SERVER_PORT:8082}
+  port: ${SERVER_PORT:4550}
 
 azure:
   application-insights:
