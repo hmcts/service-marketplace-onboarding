@@ -102,11 +102,14 @@ jobs:
           for i in {1..30}; do
             if curl -s http://localhost:4550/actuator/health > /dev/null; then
               echo "App is healthy"
-              break
+              exit 0
             fi
             echo "Waiting for app to be healthy ($i)..."
             sleep 2
           done
+          echo "App failed to become healthy"
+          docker compose logs
+          exit 1
 
       - name: Run OWASP ZAP DAST Scan
         uses: zaproxy/action-baseline@v0.15.0
