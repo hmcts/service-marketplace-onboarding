@@ -48,9 +48,9 @@ dependencies {
 
   // Security: pin transitive tomcat-embed-core to patched version (CVE-2026-41293, -43512, et al.)
   // Brought in transitively via spring-boot-starter-web; >=11.0.0-M1,<11.0.22 are vulnerable
-  implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.23'
+  implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.24'
 
   // API contract from api-marketplace-onboarding
   implementation 'uk.gov.hmcts.cp:api-marketplace-onboarding:0.0.2'
-  implementation 'io.swagger.core.v3:swagger-annotations:2.2.48'
+  implementation 'io.swagger.core.v3:swagger-annotations:2.2.52'
 }
