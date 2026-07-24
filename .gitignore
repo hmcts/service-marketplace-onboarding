@@ -28,6 +28,7 @@ bin/main/application.yaml
 
 applicationinsights-agent-*.jar
 *.log
+pmd-output.txt
 
 .env
 
