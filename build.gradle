@@ -57,6 +57,11 @@ dependencies {
   implementation 'org.flywaydb:flyway-core'
   implementation 'org.flywaydb:flyway-database-postgresql'
 
+  // TestContainers
+  testImplementation 'org.springframework.boot:spring-boot-testcontainers:4.1.0'
+  testImplementation 'org.testcontainers:postgresql:1.21.4'
+  testImplementation 'org.testcontainers:junit-jupiter:1.21.4'
+
   // API contract from api-marketplace-onboarding
   implementation 'uk.gov.hmcts.cp:api-marketplace-onboarding:0.0.2'
   implementation 'io.swagger.core.v3:swagger-annotations:2.2.48'

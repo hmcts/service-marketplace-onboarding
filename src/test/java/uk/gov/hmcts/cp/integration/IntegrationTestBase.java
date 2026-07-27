@@ -7,13 +7,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import uk.gov.hmcts.cp.integration.config.PostgresInitialiseForTest;
+import uk.gov.hmcts.cp.integration.config.TestContainersInitialise;
+import uk.gov.hmcts.cp.onboarding.repositories.ContactRepository;
+import uk.gov.hmcts.cp.onboarding.repositories.NewApiRequestRepository;
 import uk.gov.hmcts.cp.onboarding.repositories.OnboardingRepository;
+import uk.gov.hmcts.cp.onboarding.repositories.PublishRepository;
 
 @Slf4j
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = PostgresInitialiseForTest.class)
+@ContextConfiguration(initializers = TestContainersInitialise.class)
 public abstract class IntegrationTestBase {
 
     @Resource
@@ -22,8 +25,20 @@ public abstract class IntegrationTestBase {
     @Autowired
     protected OnboardingRepository onboardingRepository;
 
+    @Autowired
+    protected PublishRepository publishRepository;
+
+    @Autowired
+    protected NewApiRequestRepository newApiRequestRepository;
+
+    @Autowired
+    protected ContactRepository contactRepository;
+
     protected void clearAllTables() {
         log.info("Clearing all tables");
         onboardingRepository.deleteAll();
+        publishRepository.deleteAll();
+        newApiRequestRepository.deleteAll();
+        contactRepository.deleteAll();
     }
 }
