@@ -10,25 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.hmcts.cp.onboarding.models.OnboardingRequest;
+import uk.gov.hmcts.cp.onboarding.models.ContactRequest;
 import uk.gov.hmcts.cp.onboarding.services.MarketplaceRequestService;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1")
-public class OnboardingController {
+public class ContactController {
 
     private final MarketplaceRequestService marketplaceRequestService;
     private final Gson gson;
 
-    @PostMapping("/onboarding")
-    public ResponseEntity<Void> createOnboardingRequest(final @RequestBody OnboardingRequest request) {
-        log.info("Onboarding request received: organisation={}, apiRequested={}, environment={}",
-                Encode.forJava(request.getOrganisation()),
-                Encode.forJava(request.getApiRequested()),
-                Encode.forJava(request.getEnvironment()));
-        marketplaceRequestService.save("onboarding", gson.toJson(request));
+    @PostMapping("/contact")
+    public ResponseEntity<Void> contact(final @RequestBody ContactRequest request) {
+        log.info("Contact request received: organisation={}, topic={}", Encode.forJava(request.getOrganisation()), Encode.forJava(request.getTopic()));
+        marketplaceRequestService.save("contact", gson.toJson(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

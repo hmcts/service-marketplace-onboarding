@@ -9,13 +9,13 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import uk.gov.hmcts.cp.onboarding.models.OnboardingRequest;
+import uk.gov.hmcts.cp.onboarding.models.PublishRequest;
 import uk.gov.hmcts.cp.onboarding.services.MarketplaceRequestService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class OnboardingControllerTest {
+class PublishControllerTest {
 
     @Mock
     private MarketplaceRequestService marketplaceRequestService;
@@ -24,14 +24,14 @@ class OnboardingControllerTest {
     private Gson gson = new Gson();
 
     @InjectMocks
-    private OnboardingController controller;
+    private PublishController controller;
 
     @Mock
-    private OnboardingRequest request;
+    private PublishRequest request;
 
     @Test
-    void creating_onboarding_request_should_return_201() {
-        final ResponseEntity<Void> response = controller.createOnboardingRequest(request);
+    void publishing_api_should_return_201() {
+        final ResponseEntity<Void> response = controller.publishApi(request);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
