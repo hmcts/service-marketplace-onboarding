@@ -8,10 +8,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.cp.integration.config.TestContainersInitialise;
-import uk.gov.hmcts.cp.onboarding.repositories.ContactRepository;
-import uk.gov.hmcts.cp.onboarding.repositories.NewApiRequestRepository;
-import uk.gov.hmcts.cp.onboarding.repositories.OnboardingRepository;
-import uk.gov.hmcts.cp.onboarding.repositories.PublishRepository;
+import uk.gov.hmcts.cp.onboarding.repositories.MarketplaceRequestRepository;
 
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,22 +20,10 @@ public abstract class IntegrationTestBase {
     protected MockMvc mockMvc;
 
     @Autowired
-    protected OnboardingRepository onboardingRepository;
-
-    @Autowired
-    protected PublishRepository publishRepository;
-
-    @Autowired
-    protected NewApiRequestRepository newApiRequestRepository;
-
-    @Autowired
-    protected ContactRepository contactRepository;
+    protected MarketplaceRequestRepository marketplaceRequestRepository;
 
     protected void clearAllTables() {
         log.info("Clearing all tables");
-        onboardingRepository.deleteAll();
-        publishRepository.deleteAll();
-        newApiRequestRepository.deleteAll();
-        contactRepository.deleteAll();
+        marketplaceRequestRepository.deleteAll();
     }
 }

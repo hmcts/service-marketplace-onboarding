@@ -1,14 +1,16 @@
 package uk.gov.hmcts.cp.onboarding.controllers;
 
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import uk.gov.hmcts.cp.onboarding.models.ContactRequest;
-import uk.gov.hmcts.cp.onboarding.services.ContactService;
+import uk.gov.hmcts.cp.onboarding.services.MarketplaceRequestService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ContactControllerTest {
 
     @Mock
-    private ContactService contactService;
+    private MarketplaceRequestService marketplaceRequestService;
+
+    @Spy
+    private Gson gson = new Gson();
 
     @InjectMocks
     private ContactController controller;

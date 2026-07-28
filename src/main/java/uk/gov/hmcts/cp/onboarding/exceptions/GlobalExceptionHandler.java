@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
+import uk.gov.hmcts.cp.onboarding.models.ErrorResponse;
 import uk.gov.hmcts.cp.onboarding.services.ClockService;
-import uk.gov.hmcts.cp.openapi.model.ErrorResponse;
 
 import java.util.Objects;
 
