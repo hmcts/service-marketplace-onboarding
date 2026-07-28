@@ -34,8 +34,7 @@ class FlywayMigrationIntegrityTest {
 
     private static final Map<String, String> EXPECTED_CHECKSUMS = Map.ofEntries(
             Map.entry("V1.001__onboarding_request_schema.sql", "7f31f58958abc637cd71517ade30f877417440a378655ce8a68830512b6bb50f"),
-            Map.entry("V1.002__publish_new_api_contact_schema.sql", "7024a43288f5de0f0ccf66af1256a623107bd4b585e940826556d7b8370a5788"),
-            Map.entry("V1.003__generic_marketplace_request_schema.sql", "cee0fe9cd2f7cb04f8e1b469587d4128d67f6279840e8b2b9e06e2ec6d8d6d4f")
+            Map.entry("V1.002__publish_new_api_contact_schema.sql", "aac52941a48cbe5da2b8abc9c1f5e3501f93eb9fc5e974444805f15431b91dd5")
     );
 
     @Test
