@@ -1,0 +1,284 @@
+openapi: 3.0.3
+info:
+  title: API Marketplace Onboarding
+  description: Accepts inbound requests for API onboarding, publishing, new API proposals, and general contact.
+  version: 1.0.0
+
+servers:
+  - url: /v1
+
+paths:
+  /requests/onboarding:
+    post:
+      summary: Submit an API onboarding request
+      description: Request access to an existing API in the marketplace.
+      operationId: createOnboardingRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingRequest'
+            example:
+              name: Colin Smith
+              organisation: HMCTS
+              email: colin@example.com
+              jobTitle: Software Engineer
+              phone: "07700900000"
+              apiRequested: RAG Service API
+              environment: sandbox
+              callVolume: 1000/day
+              useCase: Automating hearing result document distribution
+      responses:
+        '201':
+          description: Request accepted
+        '400':
+          description: Invalid request body
+
+  /requests/publish:
+    post:
+      summary: Submit a request to publish an API
+      description: Request to list a new or updated API in the marketplace.
+      operationId: createPublishRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishRequest'
+            example:
+              fullName: Colin Smith
+              organisation: HMCTS
+              email: colin@example.com
+              jobTitle: Software Engineer
+              phone: "07700900000"
+              apiName: Hearing Results API
+              repoName: service-cp-crime-hearing-results
+              version: 1.2.0
+              domain: Hearing Results
+              classification: public
+              description: Provides real-time hearing result documents to subscribers
+      responses:
+        '201':
+          description: Request accepted
+        '400':
+          description: Invalid request body
+
+  /requests/new-api:
+    post:
+      summary: Submit a request for a new API to be created
+      description: Raise a need for an API that does not yet exist in the marketplace.
+      operationId: createNewApiRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiRequest'
+            example:
+              fullName: Colin Smith
+              organisation: HMCTS
+              email: colin@example.com
+              jobTitle: Architect
+              phone: "07700900000"
+              domain: Hearing Results
+              need: Access to live case data for downstream processing
+              urgency: High
+              existingWorkaround: Manual CSV export from case management system
+      responses:
+        '201':
+          description: Request accepted
+        '400':
+          description: Invalid request body
+
+  /requests/contact:
+    post:
+      summary: Submit a general contact request
+      description: Send a general enquiry or message to the API marketplace team.
+      operationId: createContactRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactRequest'
+            example:
+              fullName: Colin Smith
+              organisation: HMCTS
+              email: colin@example.com
+              topic: API Access
+              message: I would like to discuss access to the Hearing Results API for our dev environment
+      responses:
+        '201':
+          description: Request accepted
+        '400':
+          description: Invalid request body
+
+  /requests:
+    get:
+      summary: List all marketplace requests
+      description: Returns all stored requests across all types as raw JSON payloads.
+      operationId: listRequests
+      responses:
+        '200':
+          description: List of all requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MarketplaceRequestResponse'
+              example:
+                - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  type: onboarding
+                  payload: '{"name":"Colin Smith","organisation":"HMCTS","apiRequested":"RAG Service API"}'
+                  status: pending
+                  submittedAt: "2026-07-28T11:09:32Z"
+
+  /requests/{id}:
+    delete:
+      summary: Delete a marketplace request by ID
+      description: Permanently removes a stored request. Returns 404 if the ID does not exist.
+      operationId: deleteRequest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '204':
+          description: Request deleted successfully
+        '404':
+          description: Request not found
+
+components:
+  schemas:
+    MarketplaceRequestResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: Request type (onboarding, publish, new-api, contact)
+        payload:
+          type: string
+          description: Raw JSON payload of the original request
+        status:
+          type: string
+          description: Current status (e.g. pending)
+        submittedAt:
+          type: string
+          format: date-time
+
+
+  schemas:
+    OnboardingRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the requester
+        organisation:
+          type: string
+          description: Organisation the requester belongs to
+        email:
+          type: string
+          format: email
+        jobTitle:
+          type: string
+        phone:
+          type: string
+        apiRequested:
+          type: string
+          description: Name of the API being requested
+        environment:
+          type: string
+          description: Target environment (e.g. sandbox, dev, prod)
+        callVolume:
+          type: string
+          description: Expected call volume (e.g. 1000/day)
+        useCase:
+          type: string
+          description: Description of the intended use case
+
+    PublishRequest:
+      type: object
+      properties:
+        fullName:
+          type: string
+        organisation:
+          type: string
+        email:
+          type: string
+          format: email
+        jobTitle:
+          type: string
+        phone:
+          type: string
+        apiName:
+          type: string
+          description: Name of the API to be published
+        repoName:
+          type: string
+          description: Source repository name
+        version:
+          type: string
+          description: API version (e.g. 1.2.0)
+        domain:
+          type: string
+          description: Business domain (e.g. Hearing Results)
+        classification:
+          type: string
+          description: Visibility classification (e.g. public, internal)
+        description:
+          type: string
+          description: Short description of the API
+
+    NewApiRequest:
+      type: object
+      properties:
+        fullName:
+          type: string
+        organisation:
+          type: string
+        email:
+          type: string
+          format: email
+        jobTitle:
+          type: string
+        phone:
+          type: string
+        domain:
+          type: string
+          description: Business domain the API would belong to
+        need:
+          type: string
+          description: Description of the data or capability needed
+        urgency:
+          type: string
+          description: Urgency level (e.g. High, Medium, Low)
+        existingWorkaround:
+          type: string
+          description: Any current workaround in place
+
+    ContactRequest:
+      type: object
+      properties:
+        fullName:
+          type: string
+        organisation:
+          type: string
+        email:
+          type: string
+          format: email
+        topic:
+          type: string
+          description: Subject of the enquiry
+        message:
+          type: string
+          description: Full message content

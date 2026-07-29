@@ -16,7 +16,7 @@ import uk.gov.hmcts.cp.onboarding.services.MarketplaceRequestService;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
+@RequestMapping("/v1/requests")
 public class PublishController {
 
     private final MarketplaceRequestService marketplaceRequestService;
