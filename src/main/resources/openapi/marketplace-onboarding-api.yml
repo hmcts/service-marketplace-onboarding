@@ -4,11 +4,8 @@ info:
   description: Accepts inbound requests for API onboarding, publishing, new API proposals, and general contact.
   version: 1.0.0
 
-servers:
-  - url: /v1
-
 paths:
-  /requests/onboarding:
+  /v1/requests/onboarding:
     post:
       summary: Submit an API onboarding request
       description: Request access to an existing API in the marketplace.
@@ -35,7 +32,7 @@ paths:
         '400':
           description: Invalid request body
 
-  /requests/publish:
+  /v1/requests/publish:
     post:
       summary: Submit a request to publish an API
       description: Request to list a new or updated API in the marketplace.
@@ -64,7 +61,7 @@ paths:
         '400':
           description: Invalid request body
 
-  /requests/new-api:
+  /v1/requests/new-api:
     post:
       summary: Submit a request for a new API to be created
       description: Raise a need for an API that does not yet exist in the marketplace.
@@ -91,7 +88,7 @@ paths:
         '400':
           description: Invalid request body
 
-  /requests/contact:
+  /v1/requests/contact:
     post:
       summary: Submit a general contact request
       description: Send a general enquiry or message to the API marketplace team.
@@ -114,7 +111,7 @@ paths:
         '400':
           description: Invalid request body
 
-  /requests:
+  /v1/requests:
     get:
       summary: List all marketplace requests
       description: Returns all stored requests across all types as raw JSON payloads.
@@ -135,7 +132,7 @@ paths:
                   status: pending
                   submittedAt: "2026-07-28T11:09:32Z"
 
-  /requests/{id}:
+  /v1/requests/{id}:
     delete:
       summary: Delete a marketplace request by ID
       description: Permanently removes a stored request. Returns 404 if the ID does not exist.
@@ -175,8 +172,6 @@ components:
           type: string
           format: date-time
 
-
-  schemas:
     OnboardingRequest:
       type: object
       properties:
