@@ -25,7 +25,7 @@ class MarketplaceRequestIntegrationTest extends IntegrationTestBase {
 
     @Test
     void posting_onboarding_request_should_persist_and_return_201() throws Exception {
-        mockMvc.perform(post("/v1/onboarding")
+        mockMvc.perform(post("/v1/requests/onboarding")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"name":"John Doe","organisation":"HMCTS","email":"x@a.com",
@@ -39,7 +39,7 @@ class MarketplaceRequestIntegrationTest extends IntegrationTestBase {
 
     @Test
     void posting_publish_request_should_persist_and_return_201() throws Exception {
-        mockMvc.perform(post("/v1/publish")
+        mockMvc.perform(post("/v1/requests/publish")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"organisation":"HMCTS","email":"x@a.com","jobTitle":"Dev",
@@ -67,7 +67,7 @@ class MarketplaceRequestIntegrationTest extends IntegrationTestBase {
 
     @Test
     void posting_contact_request_should_persist_and_return_201() throws Exception {
-        mockMvc.perform(post("/v1/contact")
+        mockMvc.perform(post("/v1/requests/contact")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"organisation":"HMCTS","email":"x@a.com",
