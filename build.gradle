@@ -28,7 +28,7 @@ dependencies {
   // Java core
   implementation 'net.logstash.logback:logstash-logback-encoder:9.0'
   implementation 'org.owasp.encoder:encoder:1.4.0' // log injection prevention via Encode.forJava
-  implementation 'com.google.code.gson:gson:2.11.0' // JSON serialisation of request payloads for generic storage
+  implementation 'com.google.code.gson:gson:2.14.0' // JSON serialisation of request payloads for generic storage
 
   compileOnly 'org.projectlombok:lombok:1.18.46'
   annotationProcessor 'org.projectlombok:lombok:1.18.46'
